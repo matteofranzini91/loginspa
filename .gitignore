@@ -1,7 +1,7 @@
 #Editor
 .vscode
 #Build
-/dist
+/build
 #Dependencies
 node_modules
 package-lock.json
