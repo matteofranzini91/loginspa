@@ -3,6 +3,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
+const { devMiddlewares } = require('./server/setup');
 
 module.exports = (env, argv) => {
   return {
@@ -59,6 +60,9 @@ module.exports = (env, argv) => {
       }),
       new MiniCssExtractPlugin()
     ],
-    devtool: 'source-map'
+    devtool: 'source-map',
+    devServer: {
+      setupMiddlewares: (middlewares, devServer) => devMiddlewares(middlewares, devServer, argv)
+    }
   };
 };
