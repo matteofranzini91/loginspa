@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import { Grid, Typography } from '@mui/material';
 import { TextField, Button } from '@mui/material';
+import '../assets/scss/login.scss';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,42 +41,59 @@ const Login = () => {
 
   return (
     <>
-      <Grid container>
-        <Grid item xs={5}>
-          <Typography variant="h2">Login form</Typography>
-          <form autoComplete="off" onSubmit={handleSubmit}>
+      <Grid container className="login-form-grid-container">
+        <Grid item xs={4} className="login-form-grid-item">
+          <Typography variant="h2" className="login-form-title">
+            ¡Hola de nuevo!
+          </Typography>
+          <form autoComplete="off" onSubmit={handleSubmit} className="login-form">
             <TextField
               label="Email"
               onChange={(e) => setEmail(e.target.value)}
               required
-              variant="outlined"
+              variant="standard"
               color="secondary"
               type="email"
               sx={{ mb: 3 }}
               fullWidth
               value={email}
               error={emailError}
-              helperText={email === '' ? 'Empty field!' : ' '}
+              className="login-form-label"
             />
             <TextField
               label="Password"
               onChange={(e) => setPassword(e.target.value)}
               required
-              variant="outlined"
+              variant="standard"
               color="secondary"
               type="password"
               value={password}
               error={passwordError}
               fullWidth
               sx={{ mb: 3 }}
+              className="login-form-label"
             />
-            <Button variant="outlined" color="secondary" type="submit">
+            <Link to="/" className="link">
+              <Typography paragraph={true} className="login-form-text no-password">
+                Contraseña olvidada?
+              </Typography>
+            </Link>
+            <Button
+              variant="outlined"
+              color="secondary"
+              type="submit"
+              className="login-form-submit-button">
               Login
             </Button>
           </form>
-          <small>
-            Need an account? <Link to="/">Register here</Link>
-          </small>
+          <Typography paragraph={true} className="login-form-text no-user">
+            ¿No tienes un perfil registrado?
+            <Link to="/" className="link">
+              <Typography paragraph={true} className="login-form-text">
+                Pincha aquí
+              </Typography>
+            </Link>
+          </Typography>
         </Grid>
       </Grid>
     </>
