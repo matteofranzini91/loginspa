@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import { Grid, Typography } from '@mui/material';
 import { TextField, Button } from '@mui/material';
+import { useSignIn } from 'react-auth-kit';
 import '../assets/scss/login.scss';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const signIn = useSignIn();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,8 +35,18 @@ const Login = () => {
       })
       .then((res: AxiosResponse) => res.data)
       .then((data) => {
-        console.log(data);
-        navigate('/welcome');
+        if (
+          signIn({
+            token: data.token,
+            expiresIn: data.expiresIn,
+            tokenType: 'Bearer'
+          })
+        ) {
+          console.log(data);
+          navigate('/welcome');
+        } else {
+          //Throw error
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -73,10 +85,8 @@ const Login = () => {
               sx={{ mb: 3 }}
               className="login-form-label"
             />
-            <Link to="/" className="link">
-              <Typography paragraph={true} className="login-form-text no-password">
-                Contraseña olvidada?
-              </Typography>
+            <Link to="/refresh-password" className="login-form-text no-password link">
+              Contraseña olvidada?
             </Link>
             <Button
               variant="outlined"
@@ -88,10 +98,8 @@ const Login = () => {
           </form>
           <Typography paragraph={true} className="login-form-text no-user">
             ¿No tienes un perfil registrado?
-            <Link to="/" className="link">
-              <Typography paragraph={true} className="login-form-text">
-                Pincha aquí
-              </Typography>
+            <Link to="/register-user" className="login-form-text link">
+              Pincha aquí
             </Link>
           </Typography>
         </Grid>
