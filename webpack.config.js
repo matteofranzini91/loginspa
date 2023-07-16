@@ -46,10 +46,8 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
-          exclude: /node_modules/,
-          use: ['file-loader'],
-          include: path.join(__dirname, 'assets/images')
+          test: /\.(png|jpg|gif)$/i,
+          type: 'asset'
         }
       ]
     },

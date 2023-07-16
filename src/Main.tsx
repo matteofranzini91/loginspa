@@ -3,21 +3,20 @@ import AppRoutes from './AppRoutes';
 import './assets/scss/layout.scss';
 import Layout from './layout/Layout';
 import { AuthProvider } from 'react-auth-kit';
+import SessionProvider from './providers/SessionProvider';
 
 const Main = () => {
   return (
-    <AuthProvider
-      authType={'cookie'}
-      authName={'_auth'}
-      //cookieDomain={window.location.hostname}
-      //cookieSecure={window.location.protocol === 'https:'}
-    >
-      <Layout>
-        <BrowserRouter basename="/">
-          <AppRoutes />
-        </BrowserRouter>
-      </Layout>
+    <AuthProvider authType={'localstorage'} authName={'_auth'}>
+      <BrowserRouter basename="/">
+        <SessionProvider>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </SessionProvider>
+      </BrowserRouter>
     </AuthProvider>
+  );
 };
 
 export default Main;

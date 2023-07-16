@@ -16,8 +16,9 @@ const devMiddlewares = (middlewares, devServer, argv) => {
       (user) => user.email === req.body.email && user.password === req.body.password
     );
 
-    if (user) res.send(user);
-    else
+    if (user) {
+      res.send(user);
+    } else
       res.status(400).send({
         message: 'This is an error!'
       });
