@@ -18,7 +18,6 @@ const Main = () => {
         </BrowserRouter>
       </Layout>
     </AuthProvider>
-  );
 };
 
 export default Main;
