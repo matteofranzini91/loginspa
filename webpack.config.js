@@ -9,7 +9,8 @@ module.exports = (env, argv) => {
   return {
     output: {
       filename: argv.mode == 'production' ? '[name].[contenthash].js' : 'main.js',
-      path: path.resolve(__dirname, 'build')
+      path: path.resolve(__dirname, 'build'),
+      publicPath: '/'
     },
     resolve: {
       modules: [__dirname, 'src', 'node_modules'],
@@ -63,6 +64,7 @@ module.exports = (env, argv) => {
     ],
     devtool: 'source-map',
     devServer: {
+      historyApiFallback: true,
       setupMiddlewares: (middlewares, devServer) => devMiddlewares(middlewares, devServer, argv)
     }
   };
