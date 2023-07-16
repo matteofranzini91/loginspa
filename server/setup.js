@@ -11,8 +11,10 @@ const devMiddlewares = (middlewares, devServer, argv) => {
 
   devServer.app.use(bodyParser.json());
 
-  devServer.app.post('/login', bodyParser.json(), function (req, res) {
-    const user = users.find((user) => user.email === req.body.email);
+  devServer.app.post('/userlogin', bodyParser.json(), function (req, res) {
+    const user = users.find(
+      (user) => user.email === req.body.email && user.password === req.body.password
+    );
 
     if (user) res.send(user);
     else

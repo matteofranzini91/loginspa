@@ -1,0 +1,60 @@
+.login-form-grid-container{
+  justify-content: flex-end;
+  height: 100%;
+  background-image: url('../images/login-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+
+  .login-form-grid-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--primary-color);
+    padding: 6rem;
+
+    .login-form-submit-button{
+      width: 100%;
+      background-color: var(--cuaternary-color);
+      color: var(--primary-color);
+      padding: 0.7rem;
+      border-radius: 2rem;
+      margin:2rem 0;
+
+      &:hover{
+        background-color: var(--tertiary-color);
+      }
+
+    }
+
+    .login-form-text{
+      font-size: 0.7rem;
+
+      &.no-password{
+        display: inline-block;
+      }
+
+      &.no-user{
+        display: flex;
+        justify-content: space-around;
+      }
+
+    }
+
+    .link{
+
+      .login-form-text{
+        font-weight: bold;
+        color: var(--cuaternary-color);
+
+        &:hover{
+          color: var(--secondary-color)
+        }
+
+      }
+      
+    }
+
+  }
+
+}
