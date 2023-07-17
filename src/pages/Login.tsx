@@ -1,19 +1,21 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import { useState, useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField, Button } from '@mui/material';
-import { useSignIn } from 'react-auth-kit';
 import '../assets/scss/login.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from 'src/providers/auth/AuthProvider';
 
 const Login = () => {
-  const signIn = useSignIn();
+  const auth = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  useEffect(() => {
+    if (auth?.logged) navigate('/welcome');
+  }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -28,27 +30,7 @@ const Login = () => {
       setPasswordError(true);
     }
 
-    axios
-      .post('userlogin', {
-        email,
-        password
-      })
-      .then((res: AxiosResponse) => res.data)
-      .then((data) => {
-        if (
-          signIn({
-            token: data.token,
-            expiresIn: data.expiresIn,
-            tokenType: 'Bearer'
-          })
-        ) {
-          console.log(data);
-          navigate('/welcome');
-        } else {
-          //Throw error
-        }
-      })
-      .catch((error) => console.log(error));
+    auth?.login(email, password);
   };
 
   return (

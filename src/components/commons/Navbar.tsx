@@ -9,20 +9,14 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
-import { useSignOut } from 'react-auth-kit';
-import { useNavigate } from 'react-router';
 import logo from '../../assets/images/logo.png';
 
 import '../../assets/scss/navbar.scss';
+import { useAuth } from 'src/providers/auth/AuthProvider';
 
 function Navbar() {
-  const signOut = useSignOut();
-  const navigate = useNavigate();
-  const logout = () => {
-    signOut();
-    navigate('/');
-  };
+  const auth = useAuth();
+  const logout = () => auth?.logout('matteofranzini91@gmail.com');
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 

@@ -11,18 +11,22 @@ const devMiddlewares = (middlewares, devServer, argv) => {
 
   devServer.app.use(bodyParser.json());
 
-  devServer.app.post('/userlogin', bodyParser.json(), function (req, res) {
-    const user = users.find(
-      (user) => user.email === req.body.email && user.password === req.body.password
-    );
+  devServer.app.post('/userlogin', bodyParser.json(), (req, res) => {
+    const user = users.find((user) => user.email === req.body.email);
 
     if (user) {
-      res.send(user);
-    } else
-      res.status(400).send({
-        message: 'This is an error!'
-      });
+      if (user.password === req.body.password) res.send(user);
+      else {
+        res.statusMessage = 'INVALID_PASSWORD';
+        res.status(403).end();
+      }
+    } else {
+      res.statusMessage = 'INVALID_USER';
+      res.status(403).end();
+    }
   });
+
+  devServer.app.post('/userlogout', bodyParser.json(), (req, res) => res.status(204).send());
 
   return middlewares;
 };

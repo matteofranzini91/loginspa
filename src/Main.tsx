@@ -2,20 +2,20 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import './assets/scss/layout.scss';
 import Layout from './layout/Layout';
-import { AuthProvider } from 'react-auth-kit';
-import SessionProvider from './providers/SessionProvider';
+import AuthProvider from './providers/auth/AuthProvider';
+import NotificationsProvider from './providers/notifications/NotificationsProvider';
 
 const Main = () => {
   return (
-    <AuthProvider authType={'localstorage'} authName={'_auth'}>
-      <BrowserRouter basename="/">
-        <SessionProvider>
+    <BrowserRouter>
+      <NotificationsProvider>
+        <AuthProvider>
           <Layout>
             <AppRoutes />
           </Layout>
-        </SessionProvider>
-      </BrowserRouter>
-    </AuthProvider>
+        </AuthProvider>
+      </NotificationsProvider>
+    </BrowserRouter>
   );
 };
 

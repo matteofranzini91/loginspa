@@ -62,6 +62,12 @@ module.exports = (env, argv) => {
     ],
     devtool: 'source-map',
     devServer: {
+      client: {
+        overlay: {
+          errors: true,
+          runtimeErrors: false
+        }
+      },
       historyApiFallback: true,
       setupMiddlewares: (middlewares, devServer) => devMiddlewares(middlewares, devServer, argv)
     }

@@ -1,16 +1,13 @@
-import { useIsAuthenticated } from 'react-auth-kit';
+import { useAuth } from 'src/providers/auth/AuthProvider';
 import Navbar from 'src/components/commons/Navbar';
+import { FatherComponentDTO } from 'src/core/models/basic.model';
 
-type LayoutProps = {
-  children: JSX.Element;
-};
-
-const Layout = ({ children }: LayoutProps) => {
-  const isAuthenticated = useIsAuthenticated();
+const Layout = ({ children }: FatherComponentDTO) => {
+  const auth = useAuth();
 
   return (
     <div className="layout-container">
-      {isAuthenticated() && <Navbar />}
+      {auth?.logged && <Navbar />}
       {children}
     </div>
   );

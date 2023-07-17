@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import Welcome from './pages/Welcome';
-import { RequireAuth } from 'react-auth-kit';
+import ProtectedRoute from './components/commons/ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -12,9 +12,9 @@ const AppRoutes = () => {
       <Route
         path={'/welcome'}
         element={
-          <RequireAuth loginPath={'/'}>
+          <ProtectedRoute>
             <Welcome />
-          </RequireAuth>
+          </ProtectedRoute>
         }
       />
     </Routes>
