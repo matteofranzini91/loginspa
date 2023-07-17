@@ -4,6 +4,10 @@ import { TextField, Button } from '@mui/material';
 import '../assets/scss/login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'src/providers/auth/AuthProvider';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Tooltip from '@mui/material/Tooltip';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Login = () => {
   const auth = useAuth();
@@ -12,6 +16,15 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  //password state
+  const [passwordLabelType, setPasswordLabelType] = useState<string>('password');
+
+  const showPassword = () => {
+    passwordLabelType === 'password'
+      ? setPasswordLabelType('text')
+      : setPasswordLabelType('password');
+  };
 
   useEffect(() => {
     if (auth?.logged) navigate('/welcome');
@@ -54,29 +67,49 @@ const Login = () => {
               error={emailError}
               className="login-form-label"
             />
-            <TextField
-              label="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              variant="standard"
-              color="secondary"
-              type="password"
-              value={password}
-              error={passwordError}
-              fullWidth
-              sx={{ mb: 3 }}
-              className="login-form-label"
-            />
+            <div className="password-label-container">
+              <TextField
+                label="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                variant="standard"
+                color="secondary"
+                type={passwordLabelType}
+                value={password}
+                error={passwordError}
+                fullWidth
+                sx={{ mb: 3 }}
+                className="login-form-label password-label"
+              />
+              {passwordLabelType === 'password' ? (
+                <>
+                  <Tooltip title="Mostrar contraseña">
+                    <VisibilityIcon className="password-icon" onClick={showPassword} />
+                  </Tooltip>
+                </>
+              ) : (
+                <Tooltip title="Ocultar contraseña">
+                  <VisibilityOffIcon className="password-icon" onClick={showPassword} />
+                </Tooltip>
+              )}
+            </div>
+
             <Link to="/refresh-password" className="login-form-text no-password link">
               Contraseña olvidada?
             </Link>
-            <Button
-              variant="outlined"
-              color="secondary"
-              type="submit"
-              className="login-form-submit-button">
-              Login
-            </Button>
+            <div className="submit-button-container">
+              {auth?.logging ? (
+                <CircularProgress color="secondary" />
+              ) : (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  type="submit"
+                  className="login-form-submit-button">
+                  Login
+                </Button>
+              )}
+            </div>
           </form>
           <Typography paragraph={true} className="login-form-text no-user">
             ¿No tienes un perfil registrado?

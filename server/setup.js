@@ -14,16 +14,18 @@ const devMiddlewares = (middlewares, devServer, argv) => {
   devServer.app.post('/userlogin', bodyParser.json(), (req, res) => {
     const user = users.find((user) => user.email === req.body.email);
 
-    if (user) {
-      if (user.password === req.body.password) res.send(user);
-      else {
-        res.statusMessage = 'INVALID_PASSWORD';
+    if (user)
+      if (user.password === req.body.password) setTimeout(() => res.send(user), 2000);
+      else
+        setTimeout(() => {
+          res.statusMessage = 'INVALID_PASSWORD';
+          res.status(403).end();
+        }, 2000);
+    else
+      setTimeout(() => {
+        res.statusMessage = 'INVALID_USER';
         res.status(403).end();
-      }
-    } else {
-      res.statusMessage = 'INVALID_USER';
-      res.status(403).end();
-    }
+      }, 2000);
   });
 
   devServer.app.post('/userlogout', bodyParser.json(), (req, res) => res.status(204).send());

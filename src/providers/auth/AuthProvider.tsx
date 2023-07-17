@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FatherComponentDTO } from 'src/core/models/basic.model';
 import { loginService, logoutService } from 'src/core/services/log.services';
@@ -6,6 +6,7 @@ import { loginService, logoutService } from 'src/core/services/log.services';
 type AuthContextProps = {
   logged: boolean;
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
+  logging: boolean;
   login: (email: string, password: string) => void;
   logout: (email: string) => void;
 };
@@ -17,15 +18,20 @@ const AuthProvider = ({ children }: FatherComponentDTO) => {
   const [logged, setLogged] = useState<boolean>(
     sessionStorageValue ? JSON.parse(sessionStorageValue) : false
   );
+  const [logging, setLogging] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const login = (email: string, password: string) => {
-    loginService(email, password).then((res) => {
-      sessionStorage.setItem('token', res.data.token);
-      sessionStorage.setItem('loggedIn', 'true');
-      setLogged(true);
-      navigate('/welcome');
-    });
+    setLogging(true);
+    loginService(email, password)
+      .then((res) => {
+        sessionStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('loggedIn', 'true');
+        setLogged(true);
+        navigate('/welcome');
+        setLogging(false);
+      })
+      .catch(() => setLogging(false));
   };
 
   const logout = (email: string) => {
@@ -37,12 +43,12 @@ const AuthProvider = ({ children }: FatherComponentDTO) => {
   };
 
   return (
-    <AuthContext.Provider value={{ logged, setLogged, login, logout }}>
+    <AuthContext.Provider value={{ logged, setLogged, logging, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+export default memo(AuthProvider);
 
 export const useAuth = () => useContext(AuthContext);

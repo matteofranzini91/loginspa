@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from 'react';
 import { AxiosRequestsInterceptor } from 'src/core/interceptors/AxiosRequestsInterceptor';
 import { AxiosResponsesInterceptor } from 'src/core/interceptors/AxiosResponsesInterceptor';
-import { FatherComponentDTO } from 'src/core/models/basic.model';
+import { FatherComponentDTO, NotificationDTO } from 'src/core/models/basic.model';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
@@ -9,30 +9,39 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const NotificationsContext = createContext<null>(null);
+type NotificationsContextProps = {
+  notification: NotificationDTO;
+  setNotification: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const NotificationsContext = createContext<NotificationsContextProps | null>(null);
 
 const NotificationsProvider = ({ children }: FatherComponentDTO) => {
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [severity /* , setSeverity */] = useState<'success' | 'info' | 'warning' | 'error'>(
-    'error'
-  );
+  const [notification, setNotification] = useState<NotificationDTO>({
+    open: false,
+    severity: 'success',
+    message: ''
+  });
 
   AxiosRequestsInterceptor();
-  AxiosResponsesInterceptor(setOpen, setMessage);
+  AxiosResponsesInterceptor(setNotification);
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () =>
+    setNotification((notification) => ({
+      ...notification,
+      open: false
+    }));
 
   return (
     <NotificationsContext.Provider value={null}>
       {children}
       <Snackbar
-        open={open}
-        autoHideDuration={6000}
+        open={notification.open}
+        autoHideDuration={5000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-          {message}
+        <Alert onClose={handleClose} severity={notification.severity} sx={{ width: '100%' }}>
+          {notification.message}
         </Alert>
       </Snackbar>
     </NotificationsContext.Provider>
