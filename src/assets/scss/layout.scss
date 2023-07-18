@@ -39,3 +39,9 @@ a{
   color: var(--secondary-color);
   margin-bottom: 1rem;
 }
+
+.MuiAlert-icon path,
+.MuiAlert-message,
+.MuiAlert-action path{
+  color: var(--primary-color)
+}

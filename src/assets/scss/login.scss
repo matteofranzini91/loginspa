@@ -11,18 +11,45 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--primary-color);
-    padding: 6rem;
+    padding: 13rem;
 
-    .login-form-submit-button{
-      width: 100%;
-      background-color: var(--cuaternary-color);
-      color: var(--primary-color);
-      padding: 0.7rem;
-      border-radius: 2rem;
+    .password-label-container{
+      position: relative;
+
+      .password-icon{
+        position: absolute;
+        top: 1.2rem;
+        right: 0;
+        cursor: pointer;
+      }
+
+      .password-label{
+
+        input{
+          padding-right: 2.2rem;
+        }
+
+      }
+
+    }
+
+    .submit-button-container{
       margin:2rem 0;
+      display: flex;
+      justify-content: center;
 
-      &:hover{
-        background-color: var(--tertiary-color);
+      .login-form-submit-button{
+        width: 100%;
+        background-color: var(--cuaternary-color);
+        color: var(--primary-color);
+        padding: 0.7rem;
+        border-radius: 2rem;
+        margin:0;
+  
+        &:hover{
+          background-color: var(--tertiary-color);
+        }
+  
       }
 
     }

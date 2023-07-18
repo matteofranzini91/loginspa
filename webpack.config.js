@@ -46,10 +46,8 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
-          exclude: /node_modules/,
-          use: ['file-loader'],
-          include: path.join(__dirname, 'assets/images')
+          test: /\.(png|jpg|gif)$/i,
+          type: 'asset'
         }
       ]
     },
@@ -64,6 +62,12 @@ module.exports = (env, argv) => {
     ],
     devtool: 'source-map',
     devServer: {
+      client: {
+        overlay: {
+          errors: true,
+          runtimeErrors: false
+        }
+      },
       historyApiFallback: true,
       setupMiddlewares: (middlewares, devServer) => devMiddlewares(middlewares, devServer, argv)
     }
