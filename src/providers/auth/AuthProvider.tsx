@@ -1,7 +1,7 @@
 import { useState, createContext, useContext, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FatherComponentDTO } from 'src/core/models/basic.model';
-import { loginService, logoutService } from 'src/core/services/log.services';
+import { loginService, logoutService } from 'src/core/services/login/log.service';
 
 type AuthContextProps = {
   logged: boolean;

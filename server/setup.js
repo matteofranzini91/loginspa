@@ -30,6 +30,20 @@ const devMiddlewares = (middlewares, devServer, argv) => {
 
   devServer.app.post('/userlogout', bodyParser.json(), (req, res) => res.status(204).send());
 
+  devServer.app.post('/reset-password', bodyParser.json(), (req, res) => {
+    const user = users.find((user) => user.email === req.body.email);
+
+    if (user)
+      setTimeout(() => {
+        res.status(204).send();
+      }, 2000);
+    else
+      setTimeout(() => {
+        res.statusMessage = 'INVALID_USER';
+        res.status(403).end();
+      }, 2000);
+  });
+
   return middlewares;
 };
 
