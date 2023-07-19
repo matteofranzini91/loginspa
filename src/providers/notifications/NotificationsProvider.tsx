@@ -11,7 +11,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
 type NotificationsContextProps = {
   notification: NotificationDTO;
-  setNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationDTO>>;
 };
 
 const NotificationsContext = createContext<NotificationsContextProps | null>(null);
@@ -33,7 +33,7 @@ const NotificationsProvider = ({ children }: FatherComponentDTO) => {
     }));
 
   return (
-    <NotificationsContext.Provider value={null}>
+    <NotificationsContext.Provider value={{ notification, setNotification }}>
       {children}
       <Snackbar
         open={notification.open}
