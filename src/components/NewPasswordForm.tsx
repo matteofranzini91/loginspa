@@ -1,7 +1,7 @@
 import { useState, memo, useCallback } from 'react';
 import { Typography } from '@mui/material';
 import { LoginFormComponentDTO } from 'src/core/models/basic.model';
-import NoRegisteredUser from './commons/NoRegisteredUser';
+import LoginPageFormFooter from './commons/LoginPageFormFooter';
 import FormComponent from './commons/Form/FormComponent';
 import CommonButton from './commons/Buttons/CommonButton';
 import { FormComponentStateDTO } from 'src/core/models/form.model';
@@ -21,7 +21,7 @@ const NewPasswordForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
     }));
 
   const loginButton = useCallback(() => {
-    goToLoginForm;
+    goToLoginForm();
   }, [setLoginPanelView]);
 
   const noRegisteredUserButton = useCallback(() => {
@@ -34,7 +34,7 @@ const NewPasswordForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
 
   const handleFormSubmit = (formValues: FormComponentStateDTO) => {
     setLoadingFormButton(true);
-    resetPassqordService(formValues.email.value)
+    resetPassqordService(formValues.email.value as string)
       .then(() => {
         notification?.setNotification({
           open: true,
@@ -63,7 +63,10 @@ const NewPasswordForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
         handleSubmit={handleFormSubmit}>
         <CommonButton text="Realizar acceso" onButtonClick={loginButton} />
       </FormComponent>
-      <NoRegisteredUser noRegisteredUserButton={noRegisteredUserButton} />
+      <LoginPageFormFooter
+        text="¿No tienes un perfil registrado?"
+        actionButton={noRegisteredUserButton}
+      />
     </>
   );
 };

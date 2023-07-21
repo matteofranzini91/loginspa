@@ -7,7 +7,7 @@ import FormComponent from './commons/Form/FormComponent';
 import { FormComponentStateDTO } from 'src/core/models/form.model';
 import { loginFormLayout } from 'src/layout/forms-layouts/login-form.layout';
 import CommonButton from './commons/Buttons/CommonButton';
-import NoRegisteredUser from './commons/NoRegisteredUser';
+import LoginPageFormFooter from './commons/LoginPageFormFooter';
 
 const LoginForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
   const auth = useAuth();
@@ -18,7 +18,7 @@ const LoginForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
   }, []);
 
   const handleFormSubmit = (formValues: FormComponentStateDTO) =>
-    auth?.login(formValues.email.value, formValues.password.value);
+    auth?.login(formValues.email.value as string, formValues.password.value as string);
 
   const rememberPasswordButton = useCallback(() => {
     setLoginPanelView((oldValue) => ({
@@ -48,7 +48,10 @@ const LoginForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
         handleSubmit={handleFormSubmit}>
         <CommonButton text="Contraseña olvidada?" onButtonClick={rememberPasswordButton} />
       </FormComponent>
-      <NoRegisteredUser noRegisteredUserButton={noRegisteredUserButton} />
+      <LoginPageFormFooter
+        text="¿No tienes un perfil registrado?"
+        actionButton={noRegisteredUserButton}
+      />
     </>
   );
 };
