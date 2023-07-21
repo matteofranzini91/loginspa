@@ -23,6 +23,18 @@
 
   }
 
+  .date-field-container{
+    margin: 1.5rem 0;
+
+    .MuiOutlinedInput-notchedOutline{
+      border-color: var(--quinary-color) !important;
+    }
+  
+    .MuiFormLabel-root.MuiInputLabel-root{
+      color: var(--quinary-color);;
+    }
+  }
+
   .login-form-subtitle{
     margin-bottom: 2rem;
   }

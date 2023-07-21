@@ -44,6 +44,12 @@ const devMiddlewares = (middlewares, devServer, argv) => {
       }, 2000);
   });
 
+  devServer.app.post('/register-user', bodyParser.json(), (req, res) =>
+    setTimeout(() => {
+      res.status(204).send();
+    }, 2000)
+  );
+  
   return middlewares;
 };
 
