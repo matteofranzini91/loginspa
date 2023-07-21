@@ -49,7 +49,7 @@ const devMiddlewares = (middlewares, devServer, argv) => {
       res.status(204).send();
     }, 2000)
   );
-
+  
   return middlewares;
 };
 
