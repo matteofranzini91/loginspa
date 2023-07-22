@@ -1,6 +1,5 @@
-import { useEffect, memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'src/providers/auth/AuthProvider';
 import { LoginFormComponentDTO } from 'src/core/models/basic.model';
 import FormComponent from './commons/Form/FormComponent';
@@ -11,11 +10,6 @@ import LoginPageFormFooter from './commons/LoginPageFormFooter';
 
 const LoginForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
   const auth = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth?.logged) navigate('/welcome');
-  }, []);
 
   const handleFormSubmit = (formValues: FormComponentStateDTO) =>
     auth?.login(formValues.email.value as string, formValues.password.value as string);

@@ -10,13 +10,23 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../../assets/images/logo.png';
-
-import '../../assets/scss/navbar.scss';
 import { useAuth } from 'src/providers/auth/AuthProvider';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks/redux-hooks';
+import { cleanUserState } from 'src/redux/slice/user-slice/user-slice';
+import NavbarSkeleton from '../skeletons/NavbarSkeleton';
+import { getUserState } from 'src/redux/store';
+import '../../assets/scss/navbar.scss';
+import { UserStateDTO } from 'src/redux/slice/user-slice/types';
 
 function Navbar() {
   const auth = useAuth();
-  const logout = () => auth?.logout('matteofranzini91@gmail.com');
+  const dispatch = useAppDispatch();
+  const user: UserStateDTO = useAppSelector(getUserState);
+
+  const logout = () => {
+    auth?.logout();
+    dispatch(cleanUserState());
+  };
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -28,15 +38,17 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  return (
+  return user.loading ? (
+    <NavbarSkeleton />
+  ) : (
     <AppBar position="static" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logo} className="logo" />
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir ajustes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user.name} src={user.avatar} />
               </IconButton>
             </Tooltip>
             <Menu

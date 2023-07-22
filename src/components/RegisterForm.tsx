@@ -6,7 +6,7 @@ import CommonButton from './commons/Buttons/CommonButton';
 import LoginPageFormFooter from './commons/LoginPageFormFooter';
 import { FormComponentStateDTO } from 'src/core/models/form.model';
 import { registerFormLayout } from 'src/layout/forms-layouts/register-form.layout';
-import { registerUserService } from 'src/core/services/register-user/register-user.service';
+import { registerUserService } from 'src/core/services/user/user.service';
 import { useNotification } from 'src/providers/notifications/NotificationsProvider';
 
 const RegisterForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
