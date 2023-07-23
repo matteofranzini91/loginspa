@@ -2,20 +2,6 @@ import { UserInitialStateDTO, UserStateDTO } from "src/redux/slice/user-slice/ty
 import { FormComponentStateDTO } from "../models/form.model";
 import dayjs, { Dayjs } from "dayjs";
 
-/**
- * 
- * @param user 
- * born: {value: M, error: false}
-  company: {value: 'NTT Data', error: false}
-  email: {value: 'matteo@gmail.com', error: false}
-  name: {value: 'Matteo', error: false}
-  phone: {value: '722720098', error: false}
-  position: {value: 'SENIOR', error: false}
-  surname: {value: 'Franzini', error: false}
-  website: {value: 'hola', error: false}
- * @returns 
- */
-
 export const adaptUserInfoToFormValues = (user:UserInitialStateDTO) : FormComponentStateDTO => ({
   born: {
     value: user.birthday,

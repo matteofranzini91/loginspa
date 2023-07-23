@@ -1,0 +1,112 @@
+$theme-breakpoints:(
+    desktop2560: 2560px,
+    desktop1920: 1920px,
+    desktop1440: 1440px,
+    desktop1366: 1366px,
+    desktop1200: 1200px,
+    desktop1024: 1024px,
+    desktop991: 991px,
+    desktop768: 768px,
+    desktop576: 576px,
+    desktop360: 360px,
+);
+
+@mixin desktop2560{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop2560" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop1920{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1920" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop1440{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1440" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop1366{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1366" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop1200{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1200" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop1024{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1024" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop991{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop991" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop768{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop768" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop576{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop576" ) ){
+  
+      @content;
+
+  }
+
+}
+
+@mixin desktop360{
+
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop360" ) ){
+  
+      @content;
+
+  }
+
+}

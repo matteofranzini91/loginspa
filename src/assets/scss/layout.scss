@@ -1,3 +1,5 @@
+@import './functions';
+
 :root{
   --primary-color: #fff;
   --secondary-color: #681c99;
@@ -19,11 +21,15 @@ html {
 }
 
 body{
-  height: 100vh;
   background-image: url('../images/general-background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
+  @include desktop1366{
+    background-image: none;
+  }
+
 }
 
 a{
@@ -32,7 +38,7 @@ a{
 
 #root,
 .layout-container{
-  height: 100%;
+  min-height: 100%;
 }
 
 .MuiTypography-root.MuiTypography-h2{
@@ -49,4 +55,14 @@ a{
 
 .layout-container{
   overflow: hidden;
+}
+
+.no-resolution{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 780px;
+  font-size: 1.3rem!important;
+  text-align: center;
 }

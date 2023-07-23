@@ -1,6 +1,8 @@
+@import './functions';
+
 .login-form-grid-container{
   justify-content: flex-end;
-  height: 100%;
+  min-height: 100vh;
   background-image: url('../images/login-background.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -35,6 +37,14 @@
     padding: 13rem;
     overflow: hidden;
     position: relative;
+
+    @include desktop2560{
+      padding: 10rem;
+    }
+
+    @include desktop1920{
+      padding: 7rem;
+    }
 
     .login-form-text{
       font-size: 0.7rem;
