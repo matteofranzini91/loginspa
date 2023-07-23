@@ -62,6 +62,7 @@ module.exports = (env, argv) => {
     ],
     devtool: 'source-map',
     devServer: {
+      open: true,
       client: {
         overlay: {
           errors: true,

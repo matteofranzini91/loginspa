@@ -2,7 +2,7 @@ $theme-breakpoints:(
     desktop2560: 2560px,
     desktop1920: 1920px,
     desktop1440: 1440px,
-    desktop1366: 1366px,
+    desktop1360: 1360px,
     desktop1200: 1200px,
     desktop1024: 1024px,
     desktop991: 991px,
@@ -41,9 +41,9 @@ $theme-breakpoints:(
 
 }
 
-@mixin desktop1366{
+@mixin desktop1360{
 
-  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1366" ) ){
+  @media only screen and ( max-width: map-get( $theme-breakpoints, "desktop1360" ) ){
   
       @content;
 
