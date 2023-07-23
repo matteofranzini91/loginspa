@@ -26,7 +26,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
 
-  @include desktop1366{
+  @include desktop1360{
     background-image: none;
   }
 
@@ -65,4 +65,5 @@ a{
   max-width: 780px;
   font-size: 1.3rem!important;
   text-align: center;
+  color: var(--primary-color);
 }

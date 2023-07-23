@@ -32,7 +32,7 @@ const Layout = ({ children }: FatherComponentDTO) => {
     if (auth?.userId && fetchingUser.loading) dispatch(fetchUser(auth.userId));
   }, [auth]);
 
-  return windowWidth < 1366 ? (
+  return windowWidth < 1360 ? (
     <Typography variant="h2" className="no-resolution">
       Esta aplicación no es del todo responsiva. Es posible usarla desde una resolución de 1366px o
       superior.
