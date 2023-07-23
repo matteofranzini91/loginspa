@@ -34,6 +34,15 @@
       margin-right: 1rem;
     }
 
+    .user-linkedin-link{
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+
+    }
+
   }
 
 }

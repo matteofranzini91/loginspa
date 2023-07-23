@@ -13,6 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Tooltip from '@mui/material/Tooltip';
 import EditUserInfoForm from '../EditUserInfoForm';
+import { Link } from 'react-router-dom';
 
 type UserCardDTO = {
   user: UserInitialStateDTO;
@@ -66,7 +67,11 @@ const UserCard = ({ user }: UserCardDTO) => {
             </Typography>
             <Typography paragraph={true}>
               <LinkedInIcon className="user-icon" />
-              {`${user.website}`}
+              <Link
+                className="user-linkedin-link"
+                to={`${user.website}`}
+                target="_blank"
+                rel="noopener noreferrer">{`${user.website}`}</Link>
             </Typography>
           </>
         )}
