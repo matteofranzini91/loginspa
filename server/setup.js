@@ -36,7 +36,11 @@ const devMiddlewares = (middlewares, devServer, argv) => {
       }, 2000);
   });
 
-  devServer.app.post('/userlogout', bodyParser.json(), (req, res) => res.status(204).send());
+  devServer.app.post('/userlogout', bodyParser.json(), (req, res) =>
+    setTimeout(() => {
+      res.status(204).send();
+    }, 2000)
+  );
 
   //mock current connected user
   devServer.app.post('/authuser', bodyParser.json(), (req, res) =>
@@ -81,6 +85,12 @@ const devMiddlewares = (middlewares, devServer, argv) => {
   });
 
   devServer.app.put('/edit-user', bodyParser.json(), (req, res) =>
+    setTimeout(() => {
+      res.status(204).send();
+    }, 2000)
+  );
+
+  devServer.app.delete('/delete-user', bodyParser.json(), (req, res) =>
     setTimeout(() => {
       res.status(204).send();
     }, 2000)

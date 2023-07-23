@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Tooltip from '@mui/material/Tooltip';
 import EditUserInfoForm from '../EditUserInfoForm';
 
@@ -25,11 +26,19 @@ const UserCard = ({ user }: UserCardDTO) => {
       <CardContent>
         <CardHeader
           action={
-            <IconButton aria-label="settings">
-              <Tooltip title="Editar datos perfil">
-                <EditIcon onClick={showEditUserProfile} />
-              </Tooltip>
-            </IconButton>
+            showEditUserInfoForm ? (
+              <IconButton aria-label="settings">
+                <Tooltip title="Volver atrás">
+                  <KeyboardBackspaceIcon onClick={showEditUserProfile} />
+                </Tooltip>
+              </IconButton>
+            ) : (
+              <IconButton aria-label="settings">
+                <Tooltip title="Editar datos perfil">
+                  <EditIcon onClick={showEditUserProfile} />
+                </Tooltip>
+              </IconButton>
+            )
           }
         />
         <img className="user-image" src={user.avatar} />

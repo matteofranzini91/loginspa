@@ -22,3 +22,11 @@ export const editUserService:editUserServiceType = (body) =>
     .put('edit-user', {
       body
     })
+
+export const deleteUserService:GetUserServiceType = (userId) => 
+  axios
+    .delete('delete-user', {
+      params: {
+        userId
+      }
+    })
