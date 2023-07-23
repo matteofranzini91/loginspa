@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <Grid container className="login-form-grid-container">
-      <Grid item xs={4} className="login-form-grid-item" ref={containerRef}>
+      <Grid item xl={4} xs={5} className="login-form-grid-item" ref={containerRef}>
         <div className="slides-container">
           <Slide
             direction="down"
