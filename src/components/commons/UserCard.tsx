@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserStateDTO } from 'src/redux/slice/user-slice/types';
+import { UserInitialStateDTO } from 'src/redux/slice/user-slice/types';
 import CakeIcon from '@mui/icons-material/Cake';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
@@ -14,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import EditUserInfoForm from '../EditUserInfoForm';
 
 type UserCardDTO = {
-  user: UserStateDTO;
+  user: UserInitialStateDTO;
 };
 
 const UserCard = ({ user }: UserCardDTO) => {
@@ -34,7 +34,7 @@ const UserCard = ({ user }: UserCardDTO) => {
         />
         <img className="user-image" src={user.avatar} />
         {showEditUserInfoForm ? (
-          <EditUserInfoForm />
+          <EditUserInfoForm setShowEditUserInfoForm={setShowEditUserInfoForm} />
         ) : (
           <>
             <Typography

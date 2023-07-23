@@ -8,11 +8,7 @@ const SubmitButton = ({ text, loading }: SubmitButtonDTO) => (
     {loading ? (
       <CircularProgress color="secondary" />
     ) : (
-      <Button
-        variant="outlined"
-        color="secondary"
-        type="submit"
-        className="login-form-submit-button">
+      <Button variant="outlined" color="secondary" type="submit" className="form-submit-button">
         {text}
       </Button>
     )}

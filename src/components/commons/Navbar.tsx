@@ -16,12 +16,12 @@ import { cleanUserState } from 'src/redux/slice/user-slice/user-slice';
 import NavbarSkeleton from '../skeletons/NavbarSkeleton';
 import { getUserState } from 'src/redux/store';
 import '../../assets/scss/navbar.scss';
-import { UserStateDTO } from 'src/redux/slice/user-slice/types';
+import { UserInitialStateDTO } from 'src/redux/slice/user-slice/types';
 
 function Navbar() {
   const auth = useAuth();
   const dispatch = useAppDispatch();
-  const user: UserStateDTO = useAppSelector(getUserState);
+  const user: UserInitialStateDTO = useAppSelector(getUserState);
 
   const logout = () => {
     auth?.logout();
@@ -48,7 +48,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Abrir ajustes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user.name} src={user.avatar} />
+                <Avatar alt={user.name} src={user?.avatar ? user.avatar : ''} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -67,7 +67,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
               <MenuItem onClick={logout}>
-                <Typography textAlign="center">Log out</Typography>
+                <Typography textAlign="center">Salir</Typography>
               </MenuItem>
             </Menu>
           </Box>

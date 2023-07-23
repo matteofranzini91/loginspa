@@ -80,6 +80,12 @@ const devMiddlewares = (middlewares, devServer, argv) => {
       }, 2000);
   });
 
+  devServer.app.put('/edit-user', bodyParser.json(), (req, res) =>
+    setTimeout(() => {
+      res.status(204).send();
+    }, 2000)
+  );
+
   return middlewares;
 };
 

@@ -56,7 +56,8 @@ const RegisterForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
         formLayout={registerFormLayout}
         submitButtonText="Registrarse"
         loadingSubmitButton={loadingFormButton}
-        handleSubmit={handleFormSubmit}>
+        handleSubmit={handleFormSubmit}
+        classname="login-form">
         <CommonButton
           text="¿Ya tienes un perfil registrado y has olvidado tu constraseña?"
           onButtonClick={rememberPasswordButton}

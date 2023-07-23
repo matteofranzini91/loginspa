@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ResgisterUserServiceType, getUserServiceType } from "./user.types";
+import { ResgisterUserServiceType, GetUserServiceType, editUserServiceType } from "./user.types";
 
 export const getAuthUserService = () => 
   axios
@@ -11,8 +11,14 @@ export const registerUserService:ResgisterUserServiceType = (formValues) =>
       formValues
     })
 
-export const getUserByIdService:getUserServiceType = (userId) => 
+export const getUserByIdService:GetUserServiceType = (userId) => 
   axios
     .post('getuser', {
       userId
+    })
+
+export const editUserService:editUserServiceType = (body) => 
+  axios
+    .put('edit-user', {
+      body
     })

@@ -37,9 +37,10 @@ const LoginForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
       </Typography>
       <FormComponent
         formLayout={loginFormLayout}
-        submitButtonText="Login"
+        submitButtonText="Acceder"
         loadingSubmitButton={auth?.logging as boolean}
-        handleSubmit={handleFormSubmit}>
+        handleSubmit={handleFormSubmit}
+        classname="login-form">
         <CommonButton text="Contraseña olvidada?" onButtonClick={rememberPasswordButton} />
       </FormComponent>
       <LoginPageFormFooter

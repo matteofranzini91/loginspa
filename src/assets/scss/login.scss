@@ -23,18 +23,6 @@
 
   }
 
-  .date-field-container{
-    margin: 1.5rem 0;
-
-    .MuiOutlinedInput-notchedOutline{
-      border-color: var(--quinary-color) !important;
-    }
-  
-    .MuiFormLabel-root.MuiInputLabel-root{
-      color: var(--quinary-color);;
-    }
-  }
-
   .login-form-subtitle{
     margin-bottom: 2rem;
   }
@@ -47,54 +35,6 @@
     padding: 13rem;
     overflow: hidden;
     position: relative;
-
-    .password-label-container,
-    .email-field-container{
-      position: relative;
-
-      .form-field-icon{
-        position: absolute;
-        top: 1.2rem;
-        left: -2.5rem;
-      }
-
-      .password-icon{
-        position: absolute;
-        top: 1.2rem;
-        right: 0;
-        cursor: pointer;
-      }
-
-      .password-label{
-
-        input{
-          padding-right: 2.2rem;
-        }
-
-      }
-
-    }
-
-    .submit-button-container{
-      margin:2rem 0;
-      display: flex;
-      justify-content: center;
-
-      .login-form-submit-button{
-        width: 100%;
-        background-color: var(--cuaternary-color);
-        color: var(--primary-color);
-        padding: 0.7rem;
-        border-radius: 2rem;
-        margin:0;
-  
-        &:hover{
-          background-color: var(--tertiary-color);
-        }
-  
-      }
-
-    }
 
     .login-form-text{
       font-size: 0.7rem;

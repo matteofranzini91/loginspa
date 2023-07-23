@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { UserStateDTO } from './types'
+import { UserInitialStateDTO, UserStateDTO } from './types'
 import { fetchUser } from './user-async-actions'
-export const userInitialState: UserStateDTO = {
+export const userInitialState: UserInitialStateDTO = {
   id: 0,
   name: "",
   surname: "",
@@ -23,10 +23,14 @@ export const userSlice = createSlice({
   name: 'counter',
   initialState: userInitialState,
   reducers: {
+    setUser: (state, action: PayloadAction<UserStateDTO>) => ({
+      ...state,
+      ...action.payload
+    }),
     cleanUserState: () => userInitialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserStateDTO>) => ({
+    builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserInitialStateDTO>) => ({
       ...state,
       ...action.payload,
       loading: false,
@@ -38,6 +42,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { cleanUserState } = userSlice.actions
+export const { setUser, cleanUserState } = userSlice.actions
 
 export default userSlice.reducer

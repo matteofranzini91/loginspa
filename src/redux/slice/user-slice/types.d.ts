@@ -1,16 +1,19 @@
 export interface UserStateDTO {
-  id: number;
   name: string;
   surname: string;
   birthday: string;
   email: string;
   phone: string;
   website: string;
-  avatar: string;
   company: {
     name: string;
     position: string;
-  }
+  };
+  avatar?: string;
+}
+
+export interface UserInitialStateDTO extends UserStateDTO {
+  id: number;
   loading: boolean;
   error: boolean;
 }
