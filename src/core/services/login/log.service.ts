@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginServiceType, logoutServiceType } from "./log";
+import { loginServiceType } from "./log";
 
 export const loginService:loginServiceType = (email, password) => 
   axios
@@ -9,8 +9,6 @@ export const loginService:loginServiceType = (email, password) =>
     })
 
 
-export const logoutService:logoutServiceType = (email) => 
+export const logoutService = () => 
   axios
-    .post('userlogout', {
-      email
-    })
+    .post('userlogout')

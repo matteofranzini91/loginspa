@@ -1,15 +1,20 @@
 import { useState, useCallback, createElement } from 'react';
 import { FormComponentPropsDTO, FormComponentStateDTO } from 'src/core/models/form.model';
 import SubmitButton from '../Buttons/SubmitButton';
+import '../../../assets/scss/forms.scss';
 
 const FormComponent = ({
   formLayout,
   handleSubmit,
   submitButtonText,
   loadingSubmitButton,
+  classname,
+  defaultValues = null,
   children = null
 }: FormComponentPropsDTO) => {
-  const [formState, setFormState] = useState<FormComponentStateDTO>({});
+  const [formState, setFormState] = useState<FormComponentStateDTO>(
+    defaultValues ? defaultValues : {}
+  );
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -30,7 +35,7 @@ const FormComponent = ({
   };
 
   return (
-    <form autoComplete="off" onSubmit={onFormSubmit} className="login-form">
+    <form autoComplete="off" onSubmit={onFormSubmit} className={`${classname} form`}>
       {formLayout.map((item) => (
         <div key={item.name}>
           {createElement(item.type, {

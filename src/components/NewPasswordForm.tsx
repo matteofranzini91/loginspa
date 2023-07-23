@@ -60,7 +60,8 @@ const NewPasswordForm = ({ setLoginPanelView }: LoginFormComponentDTO) => {
         formLayout={newPasswordFormLayout}
         submitButtonText="Recuperar contraseña"
         loadingSubmitButton={loadingFormButton}
-        handleSubmit={handleFormSubmit}>
+        handleSubmit={handleFormSubmit}
+        classname="login-form">
         <CommonButton text="Realizar acceso" onButtonClick={loginButton} />
       </FormComponent>
       <LoginPageFormFooter

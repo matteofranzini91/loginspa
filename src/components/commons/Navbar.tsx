@@ -10,13 +10,39 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../../assets/images/logo.png';
-
-import '../../assets/scss/navbar.scss';
 import { useAuth } from 'src/providers/auth/AuthProvider';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks/redux-hooks';
+import { cleanUserState, setLoading } from 'src/redux/slice/user-slice/user-slice';
+import NavbarSkeleton from '../skeletons/NavbarSkeleton';
+import { getUserState } from 'src/redux/store';
+import '../../assets/scss/navbar.scss';
+import { UserInitialStateDTO } from 'src/redux/slice/user-slice/types';
+import { deleteUserService } from 'src/core/services/user/user.service';
+import { useNotification } from 'src/providers/notifications/NotificationsProvider';
 
 function Navbar() {
   const auth = useAuth();
-  const logout = () => auth?.logout('matteofranzini91@gmail.com');
+  const dispatch = useAppDispatch();
+  const notification = useNotification();
+  const user: UserInitialStateDTO = useAppSelector(getUserState);
+
+  const logout = () => {
+    dispatch(setLoading(true));
+    auth?.logout();
+    dispatch(cleanUserState());
+  };
+
+  const deleteUser = () => {
+    dispatch(setLoading(true));
+    deleteUserService(auth?.userId as number).then(() => {
+      notification?.setNotification({
+        open: true,
+        severity: 'success',
+        message: 'Usuario eliminado con éxito'
+      });
+      logout();
+    });
+  };
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -28,15 +54,17 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  return (
+  return user.loading ? (
+    <NavbarSkeleton />
+  ) : (
     <AppBar position="static" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logo} className="logo" />
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir ajustes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user.name} src={user?.avatar ? user.avatar : ''} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -54,8 +82,11 @@ function Navbar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+              <MenuItem onClick={deleteUser}>
+                <Typography textAlign="center">Eliminar ususario</Typography>
+              </MenuItem>
               <MenuItem onClick={logout}>
-                <Typography textAlign="center">Log out</Typography>
+                <Typography textAlign="center">Salir</Typography>
               </MenuItem>
             </Menu>
           </Box>

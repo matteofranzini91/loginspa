@@ -11,6 +11,8 @@ export type FormComponentPropsDTO = {
   submitButtonText: string;
   loadingSubmitButton: boolean;
   handleSubmit: (value: FormComponentStateDTO) => void
+  classname?: string;
+  defaultValues?: FormComponentStateDTO | null;
   children?: JSX.Element | null;
 }
 
@@ -24,7 +26,7 @@ export type FormComponentStateDTO = {
 export type DateFieldDTO = {
   target: {
     name: string,
-    value: Dayjs | null
+    value: string | null
   }
 }
 
