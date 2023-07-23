@@ -1,0 +1,48 @@
+.user-card-main-container{
+  height: 100%;
+
+  .card-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .user-avatar-skeleton{
+      margin: auto;
+    }
+
+    .user-card{
+      min-width: 40%;
+    }
+
+    .user-image{
+      display: block;
+      width: 10rem;
+      height: 10rem;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.23);
+    }
+
+    .user-name-position{
+      text-align: center;
+    }
+
+    .user-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 1rem;
+    }
+
+    .user-linkedin-link{
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+
+    }
+
+  }
+
+}

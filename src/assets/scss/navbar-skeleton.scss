@@ -1,0 +1,16 @@
+.main-navbar-skeleton-container{
+  background-color: var(--primary-color);
+  padding: 0.441rem 0;
+
+  .navbar-skeleton-containter{
+
+    div{
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 0 0.5rem
+    }
+
+  }
+
+}
